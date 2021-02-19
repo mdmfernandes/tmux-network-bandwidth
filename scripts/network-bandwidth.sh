@@ -49,7 +49,10 @@ get_bandwidth() {
 
 format_speed() {
   local padding=$(get_tmux_option "@tmux-network-bandwidth-padding" 5)
-  numfmt --to=iec-i --suffix "B/s" --format "%f" --padding $padding $1
+  local suffix=$(get_tmux_option "@tmux-network-bandwidth-suffix" "B/s")
+  local format=$(get_tmux_option "@tmux-network-bandwidth-format" "%f")
+
+  numfmt --to=iec --suffix $suffix --format $format --padding $padding $1
 }
 
 main() {
